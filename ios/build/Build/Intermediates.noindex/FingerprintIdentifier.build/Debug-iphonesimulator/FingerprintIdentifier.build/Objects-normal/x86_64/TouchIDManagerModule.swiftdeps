@@ -1,0 +1,369 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "TouchIDManagerModule"
+provides-nominal:
+- "21FingerprintIdentifier20TouchIDManagerModuleC"
+provides-member:
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", ""]
+provides-dynamic-lookup:
+- "authenticationFingerprintRequest"
+- "bridge"
+- "errorMessageForLAErrorCode"
+- "hasFingerprintSensor"
+depends-top-level:
+- "AssignmentPrecedence"
+- !private "BooleanLiteralType"
+- !private "CastingPrecedence"
+- "Int"
+- !private "LAContext"
+- !private "LAError"
+- !private "NSError"
+- "NSObject"
+- "RCTBridge"
+- "RCTPromiseRejectBlock"
+- "RCTPromiseResolveBlock"
+- !private "StringLiteralType"
+- "TouchIDManagerModule"
+- "Void"
+- !private "print"
+- !private "~="
+depends-member:
+- !private ["s23BidirectionalCollectionP", "init"]
+- !private ["Sb", "_getBuiltinLogicValue"]
+- !private ["s7CVarArgP", "LAContext"]
+- !private ["s7CVarArgP", "LAError"]
+- !private ["s7CVarArgP", "canEvaluatePolicy"]
+- !private ["s7CVarArgP", "errorMessageForLAErrorCode"]
+- !private ["s7CVarArgP", "evaluatePolicy"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "print"]
+- ["s7CVarArgP", ""]
+- !private ["SC7LAErrorV4CodeO", "rawValue"]
+- !private ["s10CollectionP", "init"]
+- !private ["s10ComparableP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "LAContext"]
+- !private ["s28CustomDebugStringConvertibleP", "LAError"]
+- !private ["s28CustomDebugStringConvertibleP", "canEvaluatePolicy"]
+- !private ["s28CustomDebugStringConvertibleP", "errorMessageForLAErrorCode"]
+- !private ["s28CustomDebugStringConvertibleP", "evaluatePolicy"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "print"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- ["10Foundation13CustomNSErrorP", "appCancel"]
+- ["10Foundation13CustomNSErrorP", "authenticationFailed"]
+- !private ["10Foundation13CustomNSErrorP", "code"]
+- ["10Foundation13CustomNSErrorP", "invalidContext"]
+- ["10Foundation13CustomNSErrorP", "passcodeNotSet"]
+- ["10Foundation13CustomNSErrorP", "systemCancel"]
+- ["10Foundation13CustomNSErrorP", "touchIDLockout"]
+- ["10Foundation13CustomNSErrorP", "touchIDNotAvailable"]
+- ["10Foundation13CustomNSErrorP", "userCancel"]
+- ["10Foundation13CustomNSErrorP", "userFallback"]
+- !private ["s29CustomPlaygroundQuickLookableP", "_getBuiltinLogicValue"]
+- !private ["s29CustomPlaygroundQuickLookableP", "init"]
+- !private ["s17CustomReflectableP", "_getBuiltinLogicValue"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s23CustomStringConvertibleP", "LAContext"]
+- !private ["s23CustomStringConvertibleP", "LAError"]
+- !private ["s23CustomStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s23CustomStringConvertibleP", "canEvaluatePolicy"]
+- !private ["s23CustomStringConvertibleP", "errorMessageForLAErrorCode"]
+- !private ["s23CustomStringConvertibleP", "evaluatePolicy"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "print"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s9DecodableP", "_getBuiltinLogicValue"]
+- !private ["s9DecodableP", "init"]
+- !private ["s9EncodableP", "_getBuiltinLogicValue"]
+- !private ["s9EncodableP", "init"]
+- !private ["s9EquatableP", "LAContext"]
+- !private ["s9EquatableP", "LAError"]
+- !private ["s9EquatableP", "_getBuiltinLogicValue"]
+- ["s9EquatableP", "appCancel"]
+- ["s9EquatableP", "authenticationFailed"]
+- !private ["s9EquatableP", "canEvaluatePolicy"]
+- !private ["s9EquatableP", "code"]
+- !private ["s9EquatableP", "deviceOwnerAuthenticationWithBiometrics"]
+- !private ["s9EquatableP", "errorMessageForLAErrorCode"]
+- !private ["s9EquatableP", "evaluatePolicy"]
+- !private ["s9EquatableP", "init"]
+- ["s9EquatableP", "invalidContext"]
+- ["s9EquatableP", "passcodeNotSet"]
+- !private ["s9EquatableP", "print"]
+- !private ["s9EquatableP", "rawValue"]
+- ["s9EquatableP", "systemCancel"]
+- ["s9EquatableP", "touchIDLockout"]
+- ["s9EquatableP", "touchIDNotAvailable"]
+- ["s9EquatableP", "userCancel"]
+- ["s9EquatableP", "userFallback"]
+- ["s9EquatableP", ""]
+- ["s5ErrorP", "appCancel"]
+- ["s5ErrorP", "authenticationFailed"]
+- !private ["s5ErrorP", "code"]
+- ["s5ErrorP", "invalidContext"]
+- ["s5ErrorP", "passcodeNotSet"]
+- ["s5ErrorP", "systemCancel"]
+- ["s5ErrorP", "touchIDLockout"]
+- ["s5ErrorP", "touchIDNotAvailable"]
+- ["s5ErrorP", "userCancel"]
+- ["s5ErrorP", "userFallback"]
+- !private ["s27ExpressibleByBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s26ExpressibleByStringLiteralP", "init"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["s8HashableP", "LAContext"]
+- !private ["s8HashableP", "LAError"]
+- !private ["s8HashableP", "_getBuiltinLogicValue"]
+- ["s8HashableP", "appCancel"]
+- ["s8HashableP", "authenticationFailed"]
+- !private ["s8HashableP", "canEvaluatePolicy"]
+- !private ["s8HashableP", "code"]
+- !private ["s8HashableP", "deviceOwnerAuthenticationWithBiometrics"]
+- !private ["s8HashableP", "errorMessageForLAErrorCode"]
+- !private ["s8HashableP", "evaluatePolicy"]
+- !private ["s8HashableP", "init"]
+- ["s8HashableP", "invalidContext"]
+- ["s8HashableP", "passcodeNotSet"]
+- !private ["s8HashableP", "print"]
+- !private ["s8HashableP", "rawValue"]
+- ["s8HashableP", "systemCancel"]
+- ["s8HashableP", "touchIDLockout"]
+- ["s8HashableP", "touchIDNotAvailable"]
+- ["s8HashableP", "userCancel"]
+- ["s8HashableP", "userFallback"]
+- ["s8HashableP", ""]
+- !private ["So9LAContextC", "canEvaluatePolicy"]
+- !private ["So9LAContextC", "evaluatePolicy"]
+- !private ["So9LAContextC", "init"]
+- ["SC7LAErrorV", "appCancel"]
+- ["SC7LAErrorV", "authenticationFailed"]
+- !private ["SC7LAErrorV", "code"]
+- ["SC7LAErrorV", "invalidContext"]
+- ["SC7LAErrorV", "passcodeNotSet"]
+- ["SC7LAErrorV", "systemCancel"]
+- ["SC7LAErrorV", "touchIDLockout"]
+- ["SC7LAErrorV", "touchIDNotAvailable"]
+- ["SC7LAErrorV", "userCancel"]
+- ["SC7LAErrorV", "userFallback"]
+- !private ["SC8LAPolicyO", "deviceOwnerAuthenticationWithBiometrics"]
+- !private ["s25LosslessStringConvertibleP", "_getBuiltinLogicValue"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["So8NSCodingP", "init"]
+- !private ["So9NSCopyingP", "init"]
+- !private ["So21NSItemProviderReadingP", "init"]
+- !private ["So21NSItemProviderWritingP", "init"]
+- !private ["So16NSMutableCopyingP", "init"]
+- ["So8NSObjectC", "Int"]
+- !private ["So8NSObjectC", "LAContext"]
+- !private ["So8NSObjectC", "LAError"]
+- !private ["So8NSObjectC", "NSError"]
+- ["So8NSObjectC", "RCTBridge"]
+- ["So8NSObjectC", "RCTPromiseRejectBlock"]
+- ["So8NSObjectC", "RCTPromiseResolveBlock"]
+- ["So8NSObjectC", "Void"]
+- ["So8NSObjectC", "authenticationFingerprintRequest"]
+- ["So8NSObjectC", "bridge"]
+- !private ["So8NSObjectC", "canEvaluatePolicy"]
+- ["So8NSObjectC", "errorMessageForLAErrorCode"]
+- !private ["So8NSObjectC", "evaluatePolicy"]
+- ["So8NSObjectC", "hasFingerprintSensor"]
+- ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "print"]
+- ["So8NSObjectC", ""]
+- !private ["So16NSObjectProtocolP", "LAContext"]
+- !private ["So16NSObjectProtocolP", "LAError"]
+- !private ["So16NSObjectProtocolP", "canEvaluatePolicy"]
+- !private ["So16NSObjectProtocolP", "errorMessageForLAErrorCode"]
+- !private ["So16NSObjectProtocolP", "evaluatePolicy"]
+- !private ["So16NSObjectProtocolP", "init"]
+- !private ["So16NSObjectProtocolP", "print"]
+- ["So16NSObjectProtocolP", ""]
+- !private ["So14NSSecureCodingP", "init"]
+- !private ["So8NSStringC", "init"]
+- !private ["s26RangeReplaceableCollectionP", "init"]
+- !private ["s16RawRepresentableP", "deviceOwnerAuthenticationWithBiometrics"]
+- !private ["s16RawRepresentableP", "rawValue"]
+- !private ["s8SequenceP", "init"]
+- !private ["SS", "init"]
+- !private ["s14StringProtocolP", "init"]
+- !private ["s16TextOutputStreamP", "init"]
+- !private ["s20TextOutputStreamableP", "init"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "Int"]
+- !private ["21FingerprintIdentifier20TouchIDManagerModuleC", "LAContext"]
+- !private ["21FingerprintIdentifier20TouchIDManagerModuleC", "LAError"]
+- !private ["21FingerprintIdentifier20TouchIDManagerModuleC", "NSError"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "RCTBridge"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "RCTPromiseRejectBlock"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "RCTPromiseResolveBlock"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "Void"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "authenticationFingerprintRequest"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "bridge"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "deinit"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "errorMessageForLAErrorCode"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "hasFingerprintSensor"]
+- ["21FingerprintIdentifier20TouchIDManagerModuleC", "init"]
+- !private ["21FingerprintIdentifier20TouchIDManagerModuleC", "print"]
+- !private ["s23_BidirectionalIndexableP", "init"]
+- ["10Foundation21_BridgedStoredNSErrorP", "appCancel"]
+- ["10Foundation21_BridgedStoredNSErrorP", "authenticationFailed"]
+- !private ["10Foundation21_BridgedStoredNSErrorP", "code"]
+- ["10Foundation21_BridgedStoredNSErrorP", "invalidContext"]
+- ["10Foundation21_BridgedStoredNSErrorP", "passcodeNotSet"]
+- ["10Foundation21_BridgedStoredNSErrorP", "systemCancel"]
+- ["10Foundation21_BridgedStoredNSErrorP", "touchIDLockout"]
+- ["10Foundation21_BridgedStoredNSErrorP", "touchIDNotAvailable"]
+- ["10Foundation21_BridgedStoredNSErrorP", "userCancel"]
+- ["10Foundation21_BridgedStoredNSErrorP", "userFallback"]
+- !private ["10Foundation18_ErrorCodeProtocolP", "rawValue"]
+- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "_getBuiltinLogicValue"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s39_ExpressibleByBuiltinUTF16StringLiteralP", "init"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s33_ExpressibleByStringInterpolationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s10_IndexableP", "init"]
+- !private ["s14_IndexableBaseP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "LAContext"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "LAError"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "canEvaluatePolicy"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "errorMessageForLAErrorCode"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "evaluatePolicy"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "print"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["s21_ObjectiveCBridgeableP", "_getBuiltinLogicValue"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "appCancel"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "authenticationFailed"]
+- !private ["10Foundation26_ObjectiveCBridgeableErrorP", "code"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "invalidContext"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "passcodeNotSet"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "systemCancel"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "touchIDLockout"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "touchIDNotAvailable"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "userCancel"]
+- ["10Foundation26_ObjectiveCBridgeableErrorP", "userFallback"]
+- !private ["s26_RangeReplaceableIndexableP", "init"]
+- !private ["s16_SwiftStringViewP", "init"]
+- ["10Foundation16__BridgedNSErrorP", "appCancel"]
+- ["10Foundation16__BridgedNSErrorP", "authenticationFailed"]
+- !private ["10Foundation16__BridgedNSErrorP", "code"]
+- ["10Foundation16__BridgedNSErrorP", "invalidContext"]
+- ["10Foundation16__BridgedNSErrorP", "passcodeNotSet"]
+- ["10Foundation16__BridgedNSErrorP", "systemCancel"]
+- ["10Foundation16__BridgedNSErrorP", "touchIDLockout"]
+- ["10Foundation16__BridgedNSErrorP", "touchIDNotAvailable"]
+- ["10Foundation16__BridgedNSErrorP", "userCancel"]
+- ["10Foundation16__BridgedNSErrorP", "userFallback"]
+depends-nominal:
+- !private "s23BidirectionalCollectionP"
+- !private "Sb"
+- "s7CVarArgP"
+- !private "SC7LAErrorV4CodeO"
+- !private "s10CollectionP"
+- !private "s10ComparableP"
+- "s28CustomDebugStringConvertibleP"
+- "10Foundation13CustomNSErrorP"
+- !private "s29CustomPlaygroundQuickLookableP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "s9DecodableP"
+- !private "s9EncodableP"
+- "s9EquatableP"
+- "s5ErrorP"
+- !private "s27ExpressibleByBooleanLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- "s8HashableP"
+- !private "So9LAContextC"
+- "SC7LAErrorV"
+- !private "SC8LAPolicyO"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So16NSMutableCopyingP"
+- "So8NSObjectC"
+- "So16NSObjectProtocolP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "s26RangeReplaceableCollectionP"
+- !private "s16RawRepresentableP"
+- !private "s8SequenceP"
+- !private "SS"
+- !private "s14StringProtocolP"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- "21FingerprintIdentifier20TouchIDManagerModuleC"
+- !private "s23_BidirectionalIndexableP"
+- "10Foundation21_BridgedStoredNSErrorP"
+- !private "10Foundation18_ErrorCodeProtocolP"
+- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s39_ExpressibleByBuiltinUTF16StringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s33_ExpressibleByStringInterpolationP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "s10_IndexableP"
+- !private "s14_IndexableBaseP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+- "10Foundation26_ObjectiveCBridgeableErrorP"
+- !private "s26_RangeReplaceableIndexableP"
+- !private "s16_SwiftStringViewP"
+- "10Foundation16__BridgedNSErrorP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotesc"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/FingerprintIdentifier-Bridging-Header.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventDispatcher.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h"
+- "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/LocalAuthentication.framework/Headers/LocalAuthentication.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+interface-hash: "8e485fd946fd412bcc90a3e3972583d6"
