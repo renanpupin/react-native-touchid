@@ -28,6 +28,11 @@ react-native link react-native-touchid
 
 ### Usage
 
+An big difference beetween Android and IOS version is:
+1. Android: the API do not provide a UI, then, the developer must create the UI and use this library and handle the response by event.
+2. IOS: the API provide a UI to response to the user.
+
+#### Android and IOS
 ```javascript
 /**
  * This function detect if the current device can identify finger print.
@@ -37,6 +42,7 @@ react-native link react-native-touchid
 async hasFingerprintSensor()
 
 /**
+ * Must 'setFingerprintStatusCallback' or will not work properly in Android.
  * This function detect if the current device can valid the input finger print.
  * Must be aware the many possible results of the process to identify the finger print.
  * See {AuthenticationError}
@@ -63,21 +69,27 @@ const AuthenticationError = {
 async authenticationFingerprintRequest()
 ```
 
-## Methods
+#### Android
+```javascript
+/**
+ * Cancel an authentication request.
+ *
+ * @async
+ * @return {boolean} return true or false. true if the cancelation was a sucess, else false.
+ */
+async cancelAuthentication()
+
+/**
+ * Set the finger print status callback for response.
+ *
+ * @param {Callback} fingerprintStatusCallback - function to send the response.
+ */
+setFingerprintStatusCallback(fingerprintStatusCallback : Callback)
+```
+
+## Function
 
 |Description|Android|iOS
 ---|---|---
 |Detect if has sensor hardware|✓|✓
 |Request finger print authentication|✓|✓
-
-## Events
-Description|Android|IOS
----|---|---
-|Audio finished play|✓|✓
-|Track current time|✓|✓
-|Volume changed
-|System volume changed
-|Wired headset plugged/unplugged|✓|✓
-|Audio focus changed
-|Silent mode changed (iOS only)| |✓
-|Dim screen by proximity on/off|✓|✓

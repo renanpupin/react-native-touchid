@@ -27,6 +27,10 @@ export default class App extends Component<Props> {
 
     constructor(props) {
       super(props);
+
+      FingerprintIdentifierManager.setFingerprintStatusCallback((status) => {
+          alert(status);
+      });
     }
 
     async hasFingerprintSensor() {
@@ -37,6 +41,7 @@ export default class App extends Component<Props> {
 
     async authenticationFingerprintRequest() {
         var sucess = await FingerprintIdentifierManager.authenticationFingerprintRequest();
+        console.log(sucess);
         switch ( FingerprintIdentifierManager.AuthenticationError ) {
             case FingerprintIdentifierManager.APPCANCEL: sucess = "Authentication was cancelled by application"; break;
             case FingerprintIdentifierManager.FAILED: sucess = "The user failed to provide valid credentials"; break;

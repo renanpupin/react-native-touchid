@@ -27,14 +27,20 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     //==========================================================================
     // GLOBAL VARIABLES
 
+    _fingerprintStatusCallback = null;
+
     /**
      * Creates a instance of FingerprintIdentifierManager.
      */
     constructor() {
         super();
 
+        this._hasFingerprintStatusCallback = false;
+
         DeviceEventEmitter.addListener('onAuthenticationResult', function(status: Event) {
-            alert(status);
+            if ( _hasFingerprintStatusCallback ) {
+                _fingerprintStatusCallback(status);
+            }
         });
     }
 
@@ -49,6 +55,16 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      */
     async cancelAuthentication() : boolean {
         return await NativeModules.FingerprintIdentifierManagerModule.cancelAuthentication();
+    }
+
+    /**
+     * Set the finger print status callback for response.
+     *
+     * @param {Callback} fingerprintStatusCallback - function to send the response.
+     */
+    setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
+        _fingerprintStatusCallback = fingerprintStatusCallback;
+        _hasFingerprintStatusCallback = true;
     }
 }
 
