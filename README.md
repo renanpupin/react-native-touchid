@@ -12,10 +12,6 @@ In Android must implement the UI to handle the user I/O.
 
 `$ npm install react-native-touchid --save`
 
-### Mostly automatic installation
-
-`$ react-native link react-native-react-native-touchid`
-
 ### Manual installation
 
 
@@ -131,4 +127,3 @@ if ( Platform.OS === 'android' ) {
 }
 
 ```
-  
