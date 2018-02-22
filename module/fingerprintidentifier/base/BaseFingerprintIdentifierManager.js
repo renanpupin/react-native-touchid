@@ -49,6 +49,11 @@ class BaseFingerprintIdentifierManager {
     //==========================================================================
     // CONSTRUCTOR
 
+    constructor() {
+        this.hasFingerprintSensor = this.hasFingerprintSensor.bind(this);
+        this.authenticationFingerprintRequest = this.authenticationFingerprintRequest.bind(this);
+    }
+
     //==========================================================================
     // METHODS
 

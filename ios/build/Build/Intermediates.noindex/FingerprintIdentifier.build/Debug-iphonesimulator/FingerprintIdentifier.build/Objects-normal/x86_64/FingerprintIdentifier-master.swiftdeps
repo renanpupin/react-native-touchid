@@ -1,5 +1,0 @@
-version: "Apple Swift version 4.0 (swiftlang-900.0.65.2 clang-900.0.37)"
-options: "40a4d0eaf8f58e8a421491b6e99dfa8d"
-build_time: [1517921085, 309688000]
-inputs:
-  "/Users/Teruya/Documents/react-native-development/workspace/FingerprintIdentifier/ios/TouchIDManagerModule.swift": [1517919458, 0]

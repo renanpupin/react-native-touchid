@@ -1,50 +1,3 @@
-
-# react-native-touchid
-
-[![React Native Version](https://img.shields.io/badge/react--native-latest-blue.svg?style=flat-square)](http://facebook.github.io/react-native/releases)
-
-A react-native library to use the native authentication API of the iOS and android.
-
-In IOS, the native API, provide a UI to handle the user I/O.
-In Android must implement the UI to handle the user I/O.
-
-## Getting started
-
-`$ npm install react-native-touchid --save`
-
-### Mostly automatic installation
-
-`$ react-native link react-native-react-native-touchid`
-
-### Manual installation
-
-
-#### iOS
-
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-touchid` and add `RNReactNativeTouchid.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNReactNativeTouchid.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
-
-#### Android
-
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNReactNativeTouchidPackage;` to the imports at the top of the file
-  - Add `new RNReactNativeTouchidPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-touchid'
-  	project(':react-native-touchid').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-touchid/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-touchid')
-  	```
-
-## Usage
-```javascript
-import TouchIDManger from 'react-native-touchid';
-
 import { TouchIDManager } from 'react-native-touchid';
 
 
@@ -129,6 +82,3 @@ if ( Platform.OS === 'android' ) {
         console.log("Authentication with finger print canceled failed or authentication request never started.");
     }
 }
-
-```
-  

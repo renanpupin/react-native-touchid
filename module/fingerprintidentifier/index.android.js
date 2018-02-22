@@ -37,9 +37,9 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
 
         this._hasFingerprintStatusCallback = false;
 
-        DeviceEventEmitter.addListener('onAuthenticationResult', function(status: Event) {
+        DeviceEventEmitter.addListener('onAuthenticationResult', (status: Event) => {
             if ( _hasFingerprintStatusCallback ) {
-                _fingerprintStatusCallback(status);
+                this._fingerprintStatusCallback(status);
             }
         });
     }
@@ -63,8 +63,8 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      * @param {Callback} fingerprintStatusCallback - function to send the response.
      */
     setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
-        _fingerprintStatusCallback = fingerprintStatusCallback;
-        _hasFingerprintStatusCallback = true;
+        this._fingerprintStatusCallback = fingerprintStatusCallback;
+        this._hasFingerprintStatusCallback = true;
     }
 }
 

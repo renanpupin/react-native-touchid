@@ -29,10 +29,19 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      */
     constructor() {
         super();
+
+        this.setFingerprintStatusCallback = this.setFingerprintStatusCallback.bind(this);
     }
 
     //==========================================================================
     // METHODS
+
+    /**
+     * Only for Android.
+     */
+    setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
+        console.log("In IOS not exist finger print response. Just for Android!");
+    }
 }
 
 //==========================================================================

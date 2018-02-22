@@ -1,4 +1,5 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import TouchIDManager from './module/fingerprintidentifier/';
 
-AppRegistry.registerComponent('FingerprintIdentifier', () => App);
+module.exports = {
+    TouchIDManager,
+}
