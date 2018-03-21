@@ -49,6 +49,6 @@ public class FingerprintHandler extends FingerprintManagerCompat.AuthenticationC
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("onAuthenticationResult", FingerprintIdentifierManagerModule.SUCESS);
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("onAuthenticationResult", FingerprintIdentifierManagerModule.SUCCESS);
     }
 }

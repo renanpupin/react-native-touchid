@@ -1,4 +1,5 @@
 
+
 # react-native-touchid
 
 [![React Native Version](https://img.shields.io/badge/react--native-latest-blue.svg?style=flat-square)](http://facebook.github.io/react-native/releases)
@@ -38,36 +39,11 @@ In Android must implement the UI to handle the user I/O.
   	```
 
 ## Usage
+
+### Android
+
 ```javascript
-import TouchIDManger from 'react-native-touchid';
-
 import { TouchIDManager } from 'react-native-touchid';
-
-
-/**
- * This callback receive many responses in many events.
- * Extremely used in the Android version because he do not have the UI like the IOS version.
- */
-TouchIDManager.setFingerprintStatusCallback((response) => {
-
-    switch ( TouchIDManager.AuthenticationError ) {
-        case TouchIDManager.APPCANCEL: response = "Authentication was cancelled by application"; break;
-        case TouchIDManager.FAILED: response = "The user failed to provide valid credentials"; break;
-        case TouchIDManager.INVALIDCONTEXT: response = "The context is invalid"; break;
-        case TouchIDManager.PASSCODENOTSET: response = "Passcode is not set on the device"; break;
-        case TouchIDManager.SYSTEMCANCEL: response = "Authentication was cancelled by the system"; break;
-        case TouchIDManager.LOCKOUT: response = "Too many failed attempts."; break;
-        case TouchIDManager.NOTAVAILABLE: response = "TouchIDManager is not available on the device"; break;
-        case TouchIDManager.USERCANCEL: response = "The user did cancel"; break;
-        case TouchIDManager.USERFALLBACK: response = "The user chose to use the fallback"; break;
-        case TouchIDManager.NOTERROR: response = "Did not find error code object"; break;
-        case TouchIDManager.NOLOCKSCREEN: response = "(Android) No lock sreen enable"; break;
-        case TouchIDManager.SUCESS: response = "(Android)Authentication sucess"; break;
-        case TouchIDManager.START: response = "(Android) Start authentication"; break;
-        case DEFAULT: break;
-    }
-});
-
 
 /**
  * Verify if current device has finger print available and ready to use.
@@ -75,8 +51,86 @@ TouchIDManager.setFingerprintStatusCallback((response) => {
  * @returns {boolean} true or false. true if ready to use. false if do not have hardware or finger print registered.
  */
 // Usage:
-var sucess = await TouchIDManager.hasFingerprintSensor();
-if ( sucess ) {
+var response = await TouchIDManager.hasFingerprintSensor();
+if ( response ) {
+    console.log("have finger print sensor hardware and finger print registered");
+} else {
+    console.log("not have finger print sensor");
+}
+
+
+/**
+ * In the Android, the UI must be implemented. When this function is called, the native API wait the user to input the finger print if everything is alright or immediately return an response. To cancel the authentication, or if the user give up in authenticate by finger print, call "TouchIDManager.cancelAuthentication".
+ *
+ * @return {int} see TouchIDManager.Response;
+ */
+// Usage:
+let response = await TouchIDManager.authenticationFingerprintRequest();
+switch ( response ) {
+    case TouchIDManager.Response.APPCANCEL: alert("0 - Authentication was cancelled by application"); break;
+    case TouchIDManager.Response.FAILED: alert("1 - The user failed to provide valid credentials"); break;
+    case TouchIDManager.Response.INVALIDCONTEXT: alert("2 - The context is invalid"); break;
+    case TouchIDManager.Response.PASSCODENOTSET: alert("3 - Passcode is not set on the device"); break;
+    case TouchIDManager.Response.SYSTEMCANCEL: alert("4 - Authentication was cancelled by the system"); break;
+    case TouchIDManager.Response.TOUCHIDLOCKOUT: alert("5 - Too many failed attempts."); break;
+    case TouchIDManager.Response.TOUCHIDNOTAVAILABLE: alert("6 - TouchIDManager is not available on the device"); break;
+    case TouchIDManager.Response.USERCANCEL: alert("7 - The user did cancel"); break;
+    case TouchIDManager.Response.USERFALLBACK: alert("8 - The user chose to use the fallback"); break;
+    case TouchIDManager.Response.NOTERROR: alert("9 - Did not find error code object"); break;
+    case TouchIDManager.Response.NOLOCKSCREEN: alert("10 - (Android) No lock sreen enable"); break;
+    case TouchIDManager.Response.SUCCESS: alert("11 - (Android)Authentication success"); break;
+    case TouchIDManager.Response.START: alert("12 - (Android) Start authentication"); break;
+    case DEFAULT: break;
+}
+
+/**
+ * Just for Android.
+ * Callback of the response for the authentication fingerprint process.  
+ *
+ * @return {boolean}
+ */
+TouchIDManager.setFingerprintStatusCallback((response) => {
+    switch ( response ) {
+        case TouchIDManager.Response.APPCANCEL: alert("0 - Authentication was cancelled by application"); break;
+        case TouchIDManager.Response.FAILED: alert("1 - The user failed to provide valid credentials"); break;
+        case TouchIDManager.Response.INVALIDCONTEXT: alert("2 - The context is invalid"); break;
+        case TouchIDManager.Response.PASSCODENOTSET: alert("3 - Passcode is not set on the device"); break;
+        case TouchIDManager.Response.SYSTEMCANCEL: alert("4 - Authentication was cancelled by the system"); break;
+        case TouchIDManager.Response.TOUCHIDLOCKOUT: alert("5 - Too many failed attempts."); break;
+        case TouchIDManager.Response.TOUCHIDNOTAVAILABLE: alert("6 - TouchIDManager is not available on the device"); break;
+        case TouchIDManager.Response.USERCANCEL: alert("7 - The user did cancel"); break;
+        case TouchIDManager.Response.USERFALLBACK: alert("8 - The user chose to use the fallback"); break;
+        case TouchIDManager.Response.NOTERROR: alert("9 - Did not find error code object"); break;
+        case TouchIDManager.Response.NOLOCKSCREEN: alert("10 - (Android) No lock sreen enable"); break;
+        case TouchIDManager.Response.SUCCESS: alert("11 - (Android)Authentication success"); break;
+        case TouchIDManager.Response.START: alert("12 - (Android) Start authentication"); break;
+        case DEFAULT: break;
+    }
+});
+
+/**
+ * Just for Android.
+ * Cancel the authentication fingerprint process.
+ * Always return true.
+ *
+ * @return {boolean}
+ */
+var response = await TouchIDManager.cancelAuthentication();
+```
+
+### IOS
+
+```javascript
+import { TouchIDManager } from 'react-native-touchid';
+
+/**
+ * Verify if current device has finger print available and ready to use.
+ *
+ * @returns {boolean} true or false. true if ready to use. false if do not have hardware or finger print registered.
+ */
+// Usage:
+var response = await TouchIDManager.hasFingerprintSensor();
+if ( response ) {
     console.log("have finger print sensor hardware and finger print registered");
 } else {
     console.log("not have finger print sensor");
@@ -85,45 +139,25 @@ if ( sucess ) {
 
 /**
  * In IOS, the native api alredy provide a UI interface an eventually, easier to authenticate the finger print.
- * In the Android, the UI must be implemented. When this function is called, the native API wait the user to input the finger print if everything is alright or immediately return an response. To cancel the authentication, or if the user give up in authenticate by finger print, call "TouchIDManager.cancelAuthentication".
  *
- * @return {int} see TouchIDManager.AuthenticationError;
+ * @return {int} see TouchIDManager.Response;
  */
 // Usage:
-var response = await TouchIDManager.authenticationFingerprintRequest();
-switch ( TouchIDManager.AuthenticationError ) {
-    case TouchIDManager.APPCANCEL: response = "Authentication was cancelled by application"; break;
-    case TouchIDManager.FAILED: response = "The user failed to provide valid credentials"; break;
-    case TouchIDManager.INVALIDCONTEXT: response = "The context is invalid"; break;
-    case TouchIDManager.PASSCODENOTSET: response = "Passcode is not set on the device"; break;
-    case TouchIDManager.SYSTEMCANCEL: response = "Authentication was cancelled by the system"; break;
-    case TouchIDManager.LOCKOUT: response = "Too many failed attempts."; break;
-    case TouchIDManager.NOTAVAILABLE: response = "TouchIDManager is not available on the device"; break;
-    case TouchIDManager.USERCANCEL: response = "The user did cancel"; break;
-    case TouchIDManager.USERFALLBACK: response = "The user chose to use the fallback"; break;
-    case TouchIDManager.NOTERROR: response = "Did not find error code object"; break;
-    case TouchIDManager.NOLOCKSCREEN: response = "(Android) No lock sreen enable"; break;
-    case TouchIDManager.SUCESS: response = "(Android)Authentication sucess"; break;
-    case TouchIDManager.START: response = "(Android) Start authentication"; break;
+let response = await TouchIDManager.authenticationFingerprintRequest();
+switch ( response ) {
+    case TouchIDManager.Response.APPCANCEL: alert("0 - Authentication was cancelled by application"); break;
+    case TouchIDManager.Response.FAILED: alert("1 - The user failed to provide valid credentials"); break;
+    case TouchIDManager.Response.INVALIDCONTEXT: alert("2 - The context is invalid"); break;
+    case TouchIDManager.Response.PASSCODENOTSET: alert("3 - Passcode is not set on the device"); break;
+    case TouchIDManager.Response.SYSTEMCANCEL: alert("4 - Authentication was cancelled by the system"); break;
+    case TouchIDManager.Response.TOUCHIDLOCKOUT: alert("5 - Too many failed attempts."); break;
+    case TouchIDManager.Response.TOUCHIDNOTAVAILABLE: alert("6 - TouchIDManager is not available on the device"); break;
+    case TouchIDManager.Response.USERCANCEL: alert("7 - The user did cancel"); break;
+    case TouchIDManager.Response.USERFALLBACK: alert("8 - The user chose to use the fallback"); break;
+    case TouchIDManager.Response.NOTERROR: alert("9 - Did not find error code object"); break;
+    case TouchIDManager.Response.NOLOCKSCREEN: alert("10 - (Android) No lock sreen enable"); break;
+    case TouchIDManager.Response.SUCCESS: alert("11 - (Android)Authentication success"); break;
+    case TouchIDManager.Response.START: alert("12 - (Android) Start authentication"); break;
     case DEFAULT: break;
 }
-
-
-/**
- * Just for Android.
- * The TouchIDManager.cancelAuthentication return true of false.
- * true if the cancel was a sucess, else return false.
- * Always return false if the "TouchIDManager.authenticationFingerprintRequest()" was never called.
- *
- * @return {boolean}
- */
-if ( Platform.OS === 'android' ) {
-    var sucess = await TouchIDManager.cancelAuthentication();
-    if ( sucess ) {
-        console.log("Authentication with finger print canceled with sucess.");
-    } else {
-        console.log("Authentication with finger print canceled failed or authentication request never started.");
-    }
-}
-
 ```

@@ -57,7 +57,7 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     public static final int USERFALLBACK = 8;         // The user chose to use the fallback
     public static final int NOTERROR = 9;             // Did not find error code object
     public static final int NOLOCKSCREEN = 10;        // No lock sreen enable
-    public static final int SUCESS = 11;              // Authentication sucess
+    public static final int SUCCESS = 11;             // Authentication sucess
     public static final int START = 12;               // Start authentication
 
     private ReactApplicationContext reactContext = null;
@@ -85,14 +85,13 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     // METHODS =====================================================================================
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return "FingerprintIdentifierManagerModule";
     }
 
     @ReactMethod
     public void hasFingerprintSensor(Promise promise) {
-        promise.resolve(hasFingerprintSensor());
+        promise.resolve(hasFingerprintSensor() ? SUCCESS : TOUCHIDNOTAVAILABLE);
     }
 
     public boolean hasFingerprintSensor() {
@@ -139,7 +138,8 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
                 fingerprintHandler = new FingerprintHandler(reactContext, fingerprintManager);
                 fingerprintHandler.startAuthentication(cryptoObject);
             } else {
-                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("onAuthenticationResult", FingerprintIdentifierManagerModule.FAILED);
+                promise.resolve(FAILED);
+                // reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("onAuthenticationResult", FingerprintIdentifierManagerModule.FAILED);
             }
         }
     }

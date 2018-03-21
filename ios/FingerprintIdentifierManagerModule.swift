@@ -11,19 +11,19 @@ import LocalAuthentication
 
 @objc(FingerprintIdentifierManagerModule)
 class FingerprintIdentifierManagerModule: NSObject {
-  
+
   // ATTRIBUTES =============================================================================================================
-  
+
   var bridge: RCTBridge!
-  
+
   // METHODS ================================================================================================================
-  
+
   @objc func hasFingerprintSensor(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
-    
+
     // 1. Create a authentication context
     let authenticationContext = LAContext()
     var error:NSError?
-    
+
     // 2. Check if the device has a fingerprint sensor
     // If not, show the user an alert view and bail out!
     guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
@@ -31,17 +31,17 @@ class FingerprintIdentifierManagerModule: NSObject {
       resolve(false)
       return
     }
-    
+
     print("Yes fingerprint sensor")
     resolve(true)
   }
-  
+
   @objc func authenticationFingerprintRequest(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
-    
+
     print("on")
     // 1. Create a authentication context
     let authenticationContext = LAContext()
-    
+
     // 2. Check the fingerprint
     authenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: " ", reply: {
 
@@ -50,7 +50,7 @@ class FingerprintIdentifierManagerModule: NSObject {
 
       if( success ) {
         print("fingerprint recognized")
-        resolve(true)
+        resolve(11)
       } else {
         // Check if there is an error
         if let error = error {
@@ -61,7 +61,7 @@ class FingerprintIdentifierManagerModule: NSObject {
       }
     })
   }
-  
+
   /**
    *
    */

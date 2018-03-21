@@ -17,27 +17,6 @@ import { DeviceEventEmitter, NativeModules } from 'react-native';
 //==========================================================================
 
 /**
- * @constant
- * @type {int}
- * @default {}
-*/
-const AuthenticationError = {
-    APPCANCEL: 0,            // Authentication was cancelled by application
-    FAILED: 1,               // The user failed to provide valid credentials
-    INVALIDCONTEXT: 2,       // The context is invalid
-    PASSCODENOTSET: 3,       // Passcode is not set on the device
-    SYSTEMCANCEL: 4,         // Authentication was cancelled by the system
-    TOUCHIDLOCKOUT: 5,       // Too many failed attempts.
-    TOUCHIDNOTAVAILABLE: 6,  // TouchID is not available on the device
-    USERCANCEL: 7,           // The user did cancel
-    USERFALLBACK: 8,         // The user chose to use the fallback
-    NOTERROR: 9,             // Did not find error code object
-    NOLOCKSCREEN: 10,        // (Android) No lock sreen enable
-    SUCESS: 11,              // (Android) Authentication sucess
-    START: 12                // (Android) Start authentication
-}
-
-/**
  * @class
  * @classdesc This class is responsible to provide the functionalities to identify a fingerprint request.
  */
@@ -46,10 +25,30 @@ class BaseFingerprintIdentifierManager {
     //==========================================================================
     // GLOBAL VARIABLES
 
+    Response = {}
+
     //==========================================================================
     // CONSTRUCTOR
 
     constructor() {
+
+        this.Response = {
+            APPCANCEL: 0,            // Authentication was cancelled by application
+            FAILED: 1,               // The user failed to provide valid credentials
+            INVALIDCONTEXT: 2,       // The context is invalid
+            PASSCODENOTSET: 3,       // Passcode is not set on the device
+            SYSTEMCANCEL: 4,         // Authentication was cancelled by the system
+            TOUCHIDLOCKOUT: 5,       // Too many failed attempts.
+            TOUCHIDNOTAVAILABLE: 6,  // TouchID is not available on the device
+            USERCANCEL: 7,           // The user did cancel
+            USERFALLBACK: 8,         // The user chose to use the fallback
+            NOTERROR: 9,             // Did not find error code object
+            NOLOCKSCREEN: 10,        // (Android) No lock sreen enable
+            SUCCESS: 11,              // (Android) Authentication sucess
+            START: 12                // (Android) Start authentication
+        };
+        Object.freeze(this.Response);
+
         this.hasFingerprintSensor = this.hasFingerprintSensor.bind(this);
         this.authenticationFingerprintRequest = this.authenticationFingerprintRequest.bind(this);
     }

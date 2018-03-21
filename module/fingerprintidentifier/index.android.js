@@ -28,6 +28,7 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     // GLOBAL VARIABLES
 
     _fingerprintStatusCallback = null;
+    Events = {}
 
     /**
      * Creates a instance of FingerprintIdentifierManager.
@@ -35,10 +36,13 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     constructor() {
         super();
 
-        this._hasFingerprintStatusCallback = false;
+        this.Events = {
+            onAuthenticationResult: "onAuthenticationResult"
+        };
+        Object.freeze(this.Events);
 
-        DeviceEventEmitter.addListener('onAuthenticationResult', (status: Event) => {
-            if ( _hasFingerprintStatusCallback ) {
+        DeviceEventEmitter.addListener(this.Events.onAuthenticationResult, (status: Event) => {
+            if ( this._fingerprintStatusCallback != null ) {
                 this._fingerprintStatusCallback(status);
             }
         });
@@ -64,7 +68,6 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      */
     setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
         this._fingerprintStatusCallback = fingerprintStatusCallback;
-        this._hasFingerprintStatusCallback = true;
     }
 }
 
