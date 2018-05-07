@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.touchid.module.fingerprint;
 
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;

@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.touchid.module.fingerprint;
 
 import android.Manifest;
 import android.annotation.TargetApi;

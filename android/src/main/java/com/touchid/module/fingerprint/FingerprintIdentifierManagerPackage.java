@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.touchid.module.fingerprint;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
