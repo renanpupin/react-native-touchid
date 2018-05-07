@@ -51,7 +51,7 @@ import { TouchIDManager } from 'react-native-touchid';
  * @returns {boolean} true or false. true if ready to use. false if do not have hardware or finger print registered.
  */
 // Usage:
-var response = await TouchIDManager.hasFingerprintSensor();
+let response = await TouchIDManager.hasFingerprintSensor();
 if ( response ) {
     console.log("have finger print sensor hardware and finger print registered");
 } else {
@@ -115,7 +115,7 @@ TouchIDManager.setFingerprintStatusCallback((response) => {
  *
  * @return {boolean}
  */
-var response = await TouchIDManager.cancelAuthentication();
+let response = await TouchIDManager.cancelAuthentication();
 ```
 
 ### IOS
@@ -129,7 +129,7 @@ import { TouchIDManager } from 'react-native-touchid';
  * @returns {boolean} true or false. true if ready to use. false if do not have hardware or finger print registered.
  */
 // Usage:
-var response = await TouchIDManager.hasFingerprintSensor();
+let response = await TouchIDManager.hasFingerprintSensor();
 if ( response ) {
     console.log("have finger print sensor hardware and finger print registered");
 } else {
