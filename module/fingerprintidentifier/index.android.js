@@ -37,11 +37,11 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
         super();
 
         this.Events = {
-            onAuthenticationResult: "onAuthenticationResult"
+            ON_AUTHENTICATION_RESULT: "onAuthenticationResult"
         };
         Object.freeze(this.Events);
 
-        DeviceEventEmitter.addListener(this.Events.onAuthenticationResult, (status: Event) => {
+        DeviceEventEmitter.addListener(this.Events.ON_AUTHENTICATION_RESULT, (status: Event) => {
             if ( this._fingerprintStatusCallback != null ) {
                 this._fingerprintStatusCallback(status);
             }
@@ -68,6 +68,15 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      */
     setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
         this._fingerprintStatusCallback = fingerprintStatusCallback;
+    }
+
+    /**
+     * Remove the finger print status callback for response.
+     */
+    removeFingerprintStatusCallback() {
+        if ( this._fingerprintStatusCallback != null ) {
+            DeviceEventEmitter.removeListener(this.Events.ON_AUTHENTICATION_RESULT, this._fingerprintStatusCallback);
+        }
     }
 }
 
