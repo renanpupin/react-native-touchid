@@ -14,6 +14,7 @@
  * @requires NativeModules from react-native
  */
 import BaseFingerprintIdentifierManager from './base/BaseFingerprintIdentifierManager';
+// import TouchIDModal from './component/TouchIDModal';
 import { DeviceEventEmitter, NativeModules } from 'react-native';
 
 //==========================================================================
@@ -41,6 +42,11 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
         };
         Object.freeze(this.Events);
 
+        this.setFingerprintStatusCallback = this.setFingerprintStatusCallback.bind(this);
+        this.cancelAuthentication = this.cancelAuthentication.bind(this);
+        this.removeFingerprintStatusCallback = this.removeFingerprintStatusCallback.bind(this);
+        this.authenticationFingerprintRequest = this.authenticationFingerprintRequest.bind(this);
+
         DeviceEventEmitter.addListener(this.Events.ON_AUTHENTICATION_RESULT, (status: Event) => {
             if ( this._fingerprintStatusCallback != null ) {
                 this._fingerprintStatusCallback(status);
@@ -50,6 +56,23 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
 
     //==========================================================================
     // METHODS
+
+    /**
+     * This function detect if the current device can valid the input finger print.
+     * Must be aware the many possible results of the process to identify the finger print.
+     * See {AuthenticationError}
+     *
+     * @async
+     * @returns
+     */
+    async authenticationFingerprintRequest() : int {
+        // console.log("TouchIDManager", "authenticationFingerprintRequest");
+        // console.log("TouchIDManager", TouchIDModal);
+        // console.log("TouchIDManager", TouchIDModal.setModalVisible);
+        // TouchIDModal.setModalVisible(true);
+        // console.log("TouchIDManager", "authenticationFingerprintRequest");
+        return await NativeModules.FingerprintIdentifierManagerModule.authenticationFingerprintRequest();
+    }
 
     /**
      * This function to cancel an authentication request.
@@ -83,7 +106,9 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
 //==========================================================================
 // EXPORTS
 
+// export TouchIDModal;
+
 /**
  * @module FingerprintIdentifierManager object
  */
-module.exports = new FingerprintIdentifierManager();
+export default new FingerprintIdentifierManager();

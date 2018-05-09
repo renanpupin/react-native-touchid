@@ -31,7 +31,7 @@ class BaseFingerprintIdentifierManager {
     // CONSTRUCTOR
 
     constructor() {
-
+            
         this.Response = {
             APPCANCEL: 0,            // Authentication was cancelled by application
             FAILED: 1,               // The user failed to provide valid credentials
@@ -50,7 +50,6 @@ class BaseFingerprintIdentifierManager {
         Object.freeze(this.Response);
 
         this.hasFingerprintSensor = this.hasFingerprintSensor.bind(this);
-        this.authenticationFingerprintRequest = this.authenticationFingerprintRequest.bind(this);
     }
 
     //==========================================================================
@@ -64,18 +63,6 @@ class BaseFingerprintIdentifierManager {
      */
     async hasFingerprintSensor() : boolean {
         return await NativeModules.FingerprintIdentifierManagerModule.hasFingerprintSensor();
-    }
-
-    /**
-     * This function detect if the current device can valid the input finger print.
-     * Must be aware the many possible results of the process to identify the finger print.
-     * See {AuthenticationError}
-     *
-     * @async
-     * @returns
-     */
-    async authenticationFingerprintRequest() : int {
-        return await NativeModules.FingerprintIdentifierManagerModule.authenticationFingerprintRequest();
     }
 
     //==========================================================================

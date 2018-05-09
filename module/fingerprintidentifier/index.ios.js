@@ -31,10 +31,25 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
         super();
 
         this.setFingerprintStatusCallback = this.setFingerprintStatusCallback.bind(this);
+        this.removeFingerprintStatusCallback = this.removeFingerprintStatusCallback.bind(this);
+        this.authenticationFingerprintRequest = this.authenticationFingerprintRequest.bind(this);
     }
 
     //==========================================================================
     // METHODS
+
+    /**
+     * This function detect if the current device can valid the input finger print.
+     * Must be aware the many possible results of the process to identify the finger print.
+     * See {AuthenticationError}
+     *
+     * @async
+     * @returns
+     */
+    async authenticationFingerprintRequest() : int {
+        TouchIDModal.setModalVisible();
+        return await NativeModules.FingerprintIdentifierManagerModule.authenticationFingerprintRequest();
+    }
 
     /**
      * Only for Android.
@@ -42,7 +57,7 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
         console.log("In IOS not exist finger print response. Just for Android!");
     }
-    
+
     removeFingerprintStatusCallback() {
         console.log("In IOS not exist finger print response. Just for Android!");
     }
