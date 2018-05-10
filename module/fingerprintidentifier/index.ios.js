@@ -24,6 +24,11 @@ import { DeviceEventEmitter, NativeModules } from 'react-native';
  */
 class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
 
+    //==========================================================================
+    // GLOBAL VARIABLES
+
+    Modal = null;
+    
     /**
      * Creates a instance of FingerprintIdentifierManager.
      */

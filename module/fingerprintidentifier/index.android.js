@@ -14,7 +14,7 @@
  * @requires NativeModules from react-native
  */
 import BaseFingerprintIdentifierManager from './base/BaseFingerprintIdentifierManager';
-// import TouchIDModal from './component/TouchIDModal';
+import TouchIDModal from './component/TouchIDModal';
 import { DeviceEventEmitter, NativeModules } from 'react-native';
 
 //==========================================================================
@@ -28,6 +28,7 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     //==========================================================================
     // GLOBAL VARIABLES
 
+    Modal = null;
     _fingerprintStatusCallback = null;
     Events = {}
 
@@ -36,6 +37,8 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      */
     constructor() {
         super();
+
+        this.Modal = TouchIDModal;
 
         this.Events = {
             ON_AUTHENTICATION_RESULT: "onAuthenticationResult"
@@ -66,11 +69,6 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      * @returns
      */
     async authenticationFingerprintRequest() : int {
-        // console.log("TouchIDManager", "authenticationFingerprintRequest");
-        // console.log("TouchIDManager", TouchIDModal);
-        // console.log("TouchIDManager", TouchIDModal.setModalVisible);
-        // TouchIDModal.setModalVisible(true);
-        // console.log("TouchIDManager", "authenticationFingerprintRequest");
         return await NativeModules.FingerprintIdentifierManagerModule.authenticationFingerprintRequest();
     }
 

@@ -6,7 +6,8 @@
 //==========================================================================
 // IMPORTS
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {TouchIDManager} from 'react-native-touchid';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
     Modal,
@@ -16,7 +17,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Animated
 } from 'react-native';
 
 //==========================================================================
@@ -29,44 +29,90 @@ class TouchIDModal extends Component {
     //==========================================================================
     // GLOBAL VARIABLES
 
+    Identification = {}
+    Idle = {}
+    Valid = {}
+    Invalid = {}
+
     /**
      * Creates a instance of TouchIDModal.
      */
     constructor(props) {
         super(props);
 
-        console.log("TouchIDModal", "TouchIDModal constructor");
-        this.state = {
-            fadeAnim: new Animated.Value(0),
+        console.log("TouchIDManager", "TouchIDModal constructor");
+
+        this.Idle = {
+            ICON:               "md-finger-print",
+            BACKGROUND_COLOR:   "rgba(96, 125, 138, 1)",
+            MESSAGE:                "Toque no sensor.",
         }
-        this._handleCancelFingerprintIdentification = this._handleCancelFingerprintIdentification.bind(this);
+        Object.freeze(this.Idle);
+
+        this.Valid = {
+            ICON: "md-checkmark",
+            BACKGROUND_COLOR: "rgba(0, 149, 136, 1)",
+            MESSAGE: "Autenticação bem sucedida!",
+        }
+        Object.freeze(this.Valid);
+
+        this.Invalid = {
+            ICON:               "md-close",
+            BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
+            MESSAGE:            "Tente novamente.",
+        }
+        Object.freeze(this.Invalid);
+
+        this.Identification = {
+            Idle: this.Idle,
+            Valid: this.Valid,
+            Invalid: this.Invalid,
+        }
+
+        this.state = {
+            icon:            this.Identification.Idle.ICON,
+            backgroundColor: this.Identification.Idle.BACKGROUND_COLOR,
+            message:         this.Identification.Idle.MESSAGE,
+            visible:         false,
+        }
     }
 
     //==========================================================================
     // METHODS
 
-    _handleCancelFingerprintIdentification () {
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+    componentWillUnmount() {
+        this.props.onRef(undefined)
+    }
 
-        console.log("TouchIDManager", "_handleCancelFingerprintIdentification");
-        // this.props.toggleVisible();
+    async setType (type) : void {
 
-        Animated.timing(this.state.fadeAnim, {
-            toValue: 1,
-            duration: 1000,
-        }).start();
+        console.log("TouchIDManager", "setType");
+        this.setState({
+            icon:               type.ICON,
+            backgroundColor:    type.BACKGROUND_COLOR,
+            message:            type.MESSAGE,
+        });
+    }
+
+    show() : void {
+
+        console.log("TouchIDManager", "show");
+        this.setState({visible: true});
     }
 
     //==========================================================================
     // render
 
     render() {
-        let { fadeAnim } = this.state;
-
         return (
             <Modal
                 animationType="fade"
                 transparent={false}
-                visible={this.props.visible}
+                // visible={this.props.visible}
+                visible={this.state.visible}
                 transparent={true}
                 onRequestClose={() => {}}
                 >
@@ -80,17 +126,21 @@ class TouchIDModal extends Component {
                     >
                     <View
                         style={{
+                            borderRadius: 3,
                             backgroundColor: "#fff",
-                            elevation: 10
+                            elevation: 10,
+                            width: '90%',
+                            maxWidth: '90%',
+                            minHeight: 240,
+                            paddingHorizontal: 24,
+                            paddingTop: 24,
+                            paddingBottom: 8,
                         }}
                         >
                         <View
                             style={{
-                                paddingTop: 24,
-                                paddingLeft: 24,
-                                paddingRight: 24,
-                                paddingBottom: 16,
-                                backgroundColor: 'yellow',
+                                justifyContent: 'center',
+                                flexGrow: 1,
                             }}
                             >
                             <Text
@@ -100,70 +150,70 @@ class TouchIDModal extends Component {
                                     color: 'black'
                                 }}
                                 >
-                                Login
+                                Acesse o FalaFreud
                             </Text>
-                            <Text
-                                style = {{
-                                    fontSize: 18,
-                                    marginTop: 20,
-                                }}
-                                >
-                                Confirme biometria para continuar
+                        </View>
+                        <View
+                            style={{
+                                paddingVertical: 10,
+                                flexGrow: 1,
+                                justifyContent: 'center',
+                            }}>
+                            <Text style={{fontSize: 16,}}>
+                                Por favor passe o dedo no sensor de impressão digital.
                             </Text>
+                        </View>
+                        <View
+                            style={{
+                                flexGrow: 2,
+                                flexDirection: 'row',
+                                alignItems: 'center'
+                            }}
+                            >
                             <View
-                                style={{
-                                    flexDirection: 'row',
-                                    marginTop: 28,
+                                style = {{
+                                    height: 50,
+                                    width: 50,
+                                    marginRight: 16,
+                                    backgroundColor: this.state.backgroundColor,
+                                    borderRadius: 50/2,
+                                    justifyContent: 'center',
                                     alignItems: 'center'
                                 }}
                                 >
-                                <View
-                                    style = {{
-                                        height: 40,
-                                        width: 40,
-                                        marginRight: 16,
-                                        backgroundColor: 'rgba(96, 125, 138, 1)',
-                                        borderRadius: 40/2,
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                    >
-
-                                    <Animated.View style={{ opacity: fadeAnim, }}>
-                                        <Icon
-                                            name = {"md-finger-print"}
-                                            size = {24}
-                                            color={'white'}/>
-                                    </Animated.View>
-                                </View>
-                                <Text style = {{fontSize: 16}}>
-                                    Toque no sensor
-                                </Text>
+                                <Icon
+                                    name={this.state.icon}
+                                    size={30}
+                                    color={'white'}/>
                             </View>
+                            <Text
+                                style={{
+                                    fontSize: 14,
+                                    flex: 1,
+                                    color: '#ccc',
+                                }}
+                                >
+                                {this.state.message}
+                            </Text>
                         </View>
-
                         <View
                             style={{
                                 flexDirection: 'row',
-                                paddingTop: 8,
-                                paddingRight: 8,
-                                paddingBottom: 8,
                                 justifyContent: 'flex-end',
                                 alignItems: 'center',
-                                height: 52,
-                                backgroundColor: 'green',
                             }}
                             >
                             <TouchableOpacity
-                                onPress={this.props.toggleVisible}
+                                visible={this.state.noActionVisible}
+                                onPress={() => {
+                                    this.props.onCanceled();
+                                }}
                                 style = {{
-                                    backgroundColor: 'red',
-                                    height: 36,
-                                    marginRight: 8,
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    paddingLeft: 10,
-                                    paddingRight: 10,
+                                    // backgroundColor: 'magenta',
+                                    paddingVertical: 10,
+                                    paddingHorizontal: 4,
                                 }}
                                 >
                                 <Text
@@ -173,28 +223,7 @@ class TouchIDModal extends Component {
                                         fontSize: 18,
                                     }}
                                     >
-                                    USAR SENHA
-                                </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this._handleCancelFingerprintIdentification()
-                                }}
-                                style = {{
-                                    height: 36,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    paddingLeft: 10,
-                                    paddingRight: 10,
-                                }}
-                                >
-                                <Text
-                                    style = {{
-                                        fontWeight: 'bold',
-                                        fontSize: 18,
-                                    }}
-                                    >
-                                    CANCELAR
+                                    Cancelar
                                 </Text>
                             </TouchableOpacity>
                         </View>
