@@ -37,6 +37,7 @@ class TouchIDModal extends Component {
     AuthenticationInvalid = {}
     AuthenticationCanceled = {}
     EnableIdle = {}
+    EnableValid = {}
     EnableInvalid = {}
     EnableCanceled = {}
 
@@ -61,7 +62,7 @@ class TouchIDModal extends Component {
             ICON:               "md-checkmark",
             BACKGROUND_COLOR:   "rgba(0, 149, 136, 1)",
             MESSAGE:            "Autenticação bem sucedida!",
-            ACTION:             "Fazer login",
+            ACTION:             "",
         }
 
         this.AuthenticationInvalid = {
@@ -88,6 +89,14 @@ class TouchIDModal extends Component {
             ACTION:             "Cancelar",
         }
 
+        this.EnableValid = {
+            TITLE:              "Habilite TouchID",
+            ICON:               "md-finger-print",
+            BACKGROUND_COLOR:   "rgba(0, 149, 136, 1)",
+            MESSAGE:            "TouchID habilitado!",
+            ACTION:             "",
+        }
+
         this.EnableInvalid = {
             TITLE:              "Habilite TouchID",
             ICON:               "md-finger-print",
@@ -109,6 +118,7 @@ class TouchIDModal extends Component {
         Object.freeze(this.AuthenticationInvalid);
         Object.freeze(this.AuthenticationCanceled);
         Object.freeze(this.EnableIdle);
+        Object.freeze(this.EnableValid);
         Object.freeze(this.EnableInvalid);
         Object.freeze(this.EnableCanceled);
 
@@ -119,6 +129,7 @@ class TouchIDModal extends Component {
             AuthenticationCanceled: this.AuthenticationCanceled,
             EnableIdle: this.EnableIdle,
             EnableInvalid: this.EnableInvalid,
+            EnableValid: this.EnableValid,
             EnableCanceled: this.EnableCanceled,
         }
 
@@ -267,31 +278,40 @@ class TouchIDModal extends Component {
                                 alignItems: 'center',
                             }}
                             >
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.props.onActionPressed();
-                                }}
-                                style = {{
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    paddingVertical: 10,
-                                }}
-                                >
-                                <Text
-                                    style = {{
-                                        fontWeight: 'bold',
-                                        color: '#87C4ED',
-                                        fontSize: 18,
-                                    }}
-                                    >
-                                    {this.state.action}
-                                </Text>
-                            </TouchableOpacity>
+                            {this._renderAction()}
                         </View>
                     </View>
                 </View>
             </Modal>
         );
+    }
+
+    _renderAction() {
+        console.log("TouchIDManager", "foi ou nao foi");
+        if ( this.state.action != "" ) {
+            return (
+                <TouchableOpacity
+                    onPress={() => {
+                        this.props.onActionPressed();
+                    }}
+                    style = {{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingVertical: 10,
+                    }}
+                    >
+                    <Text
+                        style = {{
+                            fontWeight: 'bold',
+                            color: '#87C4ED',
+                            fontSize: 18,
+                        }}
+                        >
+                        {this.state.action}
+                    </Text>
+                </TouchableOpacity>
+            );
+        }
     }
 }
 
