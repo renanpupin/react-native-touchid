@@ -38,7 +38,7 @@ class TouchIDModal extends Component {
     AuthenticationCanceled = {}
     EnableIdle = {}
     EnableInvalid = {}
-    CanceledEnable = {}
+    EnableCanceled = {}
 
     /**
      * Creates a instance of TouchIDModal.
@@ -96,7 +96,7 @@ class TouchIDModal extends Component {
             ACTION:             "Cancelar",
         }
 
-        this.CanceledEnable = {
+        this.EnableCanceled = {
             TITLE:              "Habilite TouchID",
             ICON:               "md-close",
             BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
@@ -110,7 +110,7 @@ class TouchIDModal extends Component {
         Object.freeze(this.AuthenticationCanceled);
         Object.freeze(this.EnableIdle);
         Object.freeze(this.EnableInvalid);
-        Object.freeze(this.CanceledEnable);
+        Object.freeze(this.EnableCanceled);
 
         this.State = {
             AuthenticationIdle: this.AuthenticationIdle,
@@ -119,7 +119,7 @@ class TouchIDModal extends Component {
             AuthenticationCanceled: this.AuthenticationCanceled,
             EnableIdle: this.EnableIdle,
             EnableInvalid: this.EnableInvalid,
-            CanceledEnable: this.CanceledEnable,
+            EnableCanceled: this.EnableCanceled,
         }
 
         this.state = {
@@ -269,7 +269,7 @@ class TouchIDModal extends Component {
                             >
                             <TouchableOpacity
                                 onPress={() => {
-                                    this.props.onLoginRequest();
+                                    this.props.onActionPressed();
                                 }}
                                 style = {{
                                     justifyContent: 'center',
