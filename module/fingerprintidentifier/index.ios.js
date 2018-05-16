@@ -63,6 +63,14 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     }
 
     /**
+     *
+     */
+    async cancelAuthentication() : boolean {
+        console.log("In IOS not exist finger print response. Just for Android!");
+        return false;
+    }
+
+    /**
      * Only for Android.
      */
     setFingerprintStatusCallback(fingerprintStatusCallback : Callback) {
