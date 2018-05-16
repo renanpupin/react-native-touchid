@@ -41,12 +41,12 @@ class FingerprintIdentifierManagerModule: NSObject {
     print("authenticationFingerprintRequest " + message)
     // 1. Create a authentication context
     let authenticationContext = LAContext()
-    if #available(iOS 11.0, *) {
-        authenticationContext.localizedReason = message
+    if #available(iOS 10.0, *) {
+        authenticationContext.localizedCancelTitle = "Cancelar"
     }
 
     // 2. Check the fingerprint
-    authenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: " ", reply: {
+    authenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: message, reply: {
 
       [unowned self]
       (success, error) -> Void in
