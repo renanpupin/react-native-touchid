@@ -17,6 +17,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
+    Platform
 } from 'react-native';
 
 //==========================================================================
@@ -29,10 +30,15 @@ class TouchIDModal extends Component {
     //==========================================================================
     // GLOBAL VARIABLES
 
-    Identification = {}
-    Idle = {}
-    Valid = {}
-    Invalid = {}
+    State = {}
+
+    AuthenticationIdle = {}
+    AuthenticationValid = {}
+    AuthenticationInvalid = {}
+    AuthenticationCanceled = {}
+    EnableIdle = {}
+    EnableInvalid = {}
+    CanceledEnable = {}
 
     /**
      * Creates a instance of TouchIDModal.
@@ -42,37 +48,86 @@ class TouchIDModal extends Component {
 
         console.log("TouchIDManager", "TouchIDModal constructor");
 
-        this.Idle = {
+        this.AuthenticationIdle = {
+            TITLE:              "Acesse o FalaFreud",
             ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(96, 125, 138, 1)",
-            MESSAGE:                "Toque no sensor.",
+            MESSAGE:            "Toque no sensor.",
+            ACTION:             "Fazer login",
         }
-        Object.freeze(this.Idle);
 
-        this.Valid = {
-            ICON: "md-checkmark",
-            BACKGROUND_COLOR: "rgba(0, 149, 136, 1)",
-            MESSAGE: "Autenticação bem sucedida!",
+        this.AuthenticationValid = {
+            TITLE:              "Acesse o FalaFreud",
+            ICON:               "md-checkmark",
+            BACKGROUND_COLOR:   "rgba(0, 149, 136, 1)",
+            MESSAGE:            "Autenticação bem sucedida!",
+            ACTION:             "Fazer login",
         }
-        Object.freeze(this.Valid);
 
-        this.Invalid = {
-            ICON:               "md-close",
+        this.AuthenticationInvalid = {
+            TITLE:              "Acesse o FalaFreud",
+            ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
             MESSAGE:            "Tente novamente.",
+            ACTION:             "Fazer login",
         }
-        Object.freeze(this.Invalid);
 
-        this.Identification = {
-            Idle: this.Idle,
-            Valid: this.Valid,
-            Invalid: this.Invalid,
+        this.AuthenticationCanceled = {
+            TITLE:              "Acesse o FalaFreud",
+            ICON:               "md-close",
+            BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
+            MESSAGE:            "Autenticação cancelado.",
+            ACTION:             "Fazer login",
+        }
+
+        this.EnableIdle = {
+            TITLE:              "Habilite TouchID",
+            ICON:               "md-finger-print",
+            BACKGROUND_COLOR:   "rgba(96, 125, 138, 1)",
+            MESSAGE:            "Toque no sensor.",
+            ACTION:             "Cancelar",
+        }
+
+        this.EnableInvalid = {
+            TITLE:              "Habilite TouchID",
+            ICON:               "md-finger-print",
+            BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
+            MESSAGE:            "Tente novamente.",
+            ACTION:             "Cancelar",
+        }
+
+        this.CanceledEnable = {
+            TITLE:              "Habilite TouchID",
+            ICON:               "md-close",
+            BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
+            MESSAGE:            "Autenticação cancelado.",
+            ACTION:             "Cancelar",
+        }
+
+        Object.freeze(this.AuthenticationIdle);
+        Object.freeze(this.AuthenticationValid);
+        Object.freeze(this.AuthenticationInvalid);
+        Object.freeze(this.AuthenticationCanceled);
+        Object.freeze(this.EnableIdle);
+        Object.freeze(this.EnableInvalid);
+        Object.freeze(this.CanceledEnable);
+
+        this.State = {
+            AuthenticationIdle: this.AuthenticationIdle,
+            AuthenticationValid: this.AuthenticationValid,
+            AuthenticationInvalid: this.AuthenticationInvalid,
+            AuthenticationCanceled: this.AuthenticationCanceled,
+            EnableIdle: this.EnableIdle,
+            EnableInvalid: this.EnableInvalid,
+            CanceledEnable: this.CanceledEnable,
         }
 
         this.state = {
-            icon:            this.Identification.Idle.ICON,
-            backgroundColor: this.Identification.Idle.BACKGROUND_COLOR,
-            message:         this.Identification.Idle.MESSAGE,
+            title:           this.State.AuthenticationIdle.TITLE,
+            icon:            this.State.AuthenticationIdle.ICON,
+            backgroundColor: this.State.AuthenticationIdle.BACKGROUND_COLOR,
+            message:         this.State.AuthenticationIdle.MESSAGE,
+            action:          this.State.AuthenticationIdle.ACTION,
             visible:         false,
         }
     }
@@ -83,24 +138,34 @@ class TouchIDModal extends Component {
     componentDidMount() {
         this.props.onRef(this)
     }
+
     componentWillUnmount() {
         this.props.onRef(undefined)
     }
 
-    async setType (type) : void {
+    setType (type) : void {
 
         console.log("TouchIDManager", "setType");
         this.setState({
+            title:              type.TITLE,
             icon:               type.ICON,
             backgroundColor:    type.BACKGROUND_COLOR,
             message:            type.MESSAGE,
+            action:             type.ACTION,
         });
     }
 
     show() : void {
 
         console.log("TouchIDManager", "show");
+        this.setType(this.AuthenticationIdle);
         this.setState({visible: true});
+    }
+
+    close() : void {
+
+        console.log("TouchIDManager", "close");
+        this.setState({visible: false});
     }
 
     //==========================================================================
@@ -111,7 +176,6 @@ class TouchIDModal extends Component {
             <Modal
                 animationType="fade"
                 transparent={false}
-                // visible={this.props.visible}
                 visible={this.state.visible}
                 transparent={true}
                 onRequestClose={() => {}}
@@ -134,7 +198,7 @@ class TouchIDModal extends Component {
                             minHeight: 240,
                             paddingHorizontal: 24,
                             paddingTop: 24,
-                            paddingBottom: 8,
+                            paddingBottom: 16,
                         }}
                         >
                         <View
@@ -150,7 +214,7 @@ class TouchIDModal extends Component {
                                     color: 'black'
                                 }}
                                 >
-                                Acesse o FalaFreud
+                                {this.state.title}
                             </Text>
                         </View>
                         <View
@@ -204,16 +268,13 @@ class TouchIDModal extends Component {
                             }}
                             >
                             <TouchableOpacity
-                                visible={this.state.noActionVisible}
                                 onPress={() => {
-                                    this.props.onCanceled();
+                                    this.props.onLoginRequest();
                                 }}
                                 style = {{
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    // backgroundColor: 'magenta',
                                     paddingVertical: 10,
-                                    paddingHorizontal: 4,
                                 }}
                                 >
                                 <Text
@@ -223,7 +284,7 @@ class TouchIDModal extends Component {
                                         fontSize: 18,
                                     }}
                                     >
-                                    Cancelar
+                                    {this.state.action}
                                 </Text>
                             </TouchableOpacity>
                         </View>

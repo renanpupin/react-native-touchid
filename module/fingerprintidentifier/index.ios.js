@@ -27,8 +27,6 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
     //==========================================================================
     // GLOBAL VARIABLES
 
-    Modal = null;
-    
     /**
      * Creates a instance of FingerprintIdentifierManager.
      */
@@ -36,6 +34,7 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
         super();
 
         this.setFingerprintStatusCallback = this.setFingerprintStatusCallback.bind(this);
+        this.cancelAuthentication = this.cancelAuthentication.bind(this);
         this.removeFingerprintStatusCallback = this.removeFingerprintStatusCallback.bind(this);
         this.authenticationFingerprintRequest = this.authenticationFingerprintRequest.bind(this);
     }
@@ -51,9 +50,16 @@ class FingerprintIdentifierManager extends BaseFingerprintIdentifierManager {
      * @async
      * @returns
      */
-    async authenticationFingerprintRequest() : int {
-        TouchIDModal.setModalVisible();
-        return await NativeModules.FingerprintIdentifierManagerModule.authenticationFingerprintRequest();
+    async authenticationFingerprintRequest(message = "") : int {
+        return await NativeModules.FingerprintIdentifierManagerModule.authenticationFingerprintRequest(message);
+    }
+
+    /**
+     *
+     */
+    async cancelAuthentication() : boolean {
+        console.log("In IOS not exist finger print response. Just for Android!");
+        return false;
     }
 
     /**

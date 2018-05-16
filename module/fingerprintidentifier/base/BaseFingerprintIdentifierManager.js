@@ -13,6 +13,7 @@
  * @requires NativeModules from react-native
  */
 import { DeviceEventEmitter, NativeModules } from 'react-native';
+import TouchIDModal from '../component/TouchIDModal';
 
 //==========================================================================
 
@@ -25,13 +26,16 @@ class BaseFingerprintIdentifierManager {
     //==========================================================================
     // GLOBAL VARIABLES
 
+    Modal = null;
     Response = {}
 
     //==========================================================================
     // CONSTRUCTOR
 
     constructor() {
-            
+
+        this.Modal = TouchIDModal;
+
         this.Response = {
             APPCANCEL: 0,            // Authentication was cancelled by application
             FAILED: 1,               // The user failed to provide valid credentials

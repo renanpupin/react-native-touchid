@@ -137,6 +137,7 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
                 cryptoObject = new FingerprintManagerCompat.CryptoObject(cipher);
                 fingerprintHandler = new FingerprintHandler(reactContext, fingerprintManager);
                 fingerprintHandler.startAuthentication(cryptoObject);
+                promise.resolve(START);
             } else {
                 promise.resolve(FAILED);
                 // reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("onAuthenticationResult", FingerprintIdentifierManagerModule.FAILED);

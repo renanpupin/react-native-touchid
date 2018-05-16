@@ -36,11 +36,14 @@ class FingerprintIdentifierManagerModule: NSObject {
     resolve(true)
   }
 
-  @objc func authenticationFingerprintRequest(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+  @objc func authenticationFingerprintRequest(_ message: String, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
 
-    print("on")
+    print("authenticationFingerprintRequest " + message)
     // 1. Create a authentication context
     let authenticationContext = LAContext()
+    if #available(iOS 11.0, *) {
+        authenticationContext.localizedReason = message
+    }
 
     // 2. Check the fingerprint
     authenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: " ", reply: {
