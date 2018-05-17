@@ -286,8 +286,7 @@ class TouchIDModal extends Component {
         );
     }
 
-    _renderAction() {
-        console.log("TouchIDManager", "foi ou nao foi");
+    _renderAction() {        
         if ( this.state.action != "" ) {
             return (
                 <TouchableOpacity
