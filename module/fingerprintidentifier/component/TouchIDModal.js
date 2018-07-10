@@ -41,6 +41,11 @@ class TouchIDModal extends Component {
     EnableInvalid = {}
     EnableCanceled = {}
 
+    primaryTitle = "Acesse o FalaFreud";
+    secondaryTitle = "Habilite TouchID";
+    loginText = "FAZER LOGIN";
+    cancelText = "CANCELAR";
+
     /**
      * Creates a instance of TouchIDModal.
      */
@@ -50,15 +55,15 @@ class TouchIDModal extends Component {
         console.log("TouchIDManager", "TouchIDModal constructor");
 
         this.AuthenticationIdle = {
-            TITLE:              "Acesse o FalaFreud",
+            TITLE:              this.primaryTitle,
             ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(96, 125, 138, 1)",
             MESSAGE:            "Toque no sensor.",
-            ACTION:             "Fazer login",
+            ACTION:             this.loginText,
         }
 
         this.AuthenticationValid = {
-            TITLE:              "Acesse o FalaFreud",
+            TITLE:              this.primaryTitle,
             ICON:               "md-checkmark",
             BACKGROUND_COLOR:   "rgba(0, 149, 136, 1)",
             MESSAGE:            "Autenticação bem sucedida!",
@@ -66,23 +71,23 @@ class TouchIDModal extends Component {
         }
 
         this.AuthenticationInvalid = {
-            TITLE:              "Acesse o FalaFreud",
+            TITLE:              this.primaryTitle,
             ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
             MESSAGE:            "Tente novamente.",
-            ACTION:             "Fazer login",
+            ACTION:             this.loginText,
         }
 
         this.AuthenticationCanceled = {
-            TITLE:              "Acesse o FalaFreud",
+            TITLE:              this.primaryTitle,
             ICON:               "md-close",
             BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
             MESSAGE:            "Autenticação cancelado.",
-            ACTION:             "Fazer login",
+            ACTION:             this.loginText,
         }
 
         this.EnableIdle = {
-            TITLE:              "Habilite TouchID",
+            TITLE:              this.secondaryTitle,
             ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(96, 125, 138, 1)",
             MESSAGE:            "Toque no sensor.",
@@ -90,7 +95,7 @@ class TouchIDModal extends Component {
         }
 
         this.EnableValid = {
-            TITLE:              "Habilite TouchID",
+            TITLE:              this.secondaryTitle,
             ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(0, 149, 136, 1)",
             MESSAGE:            "TouchID habilitado!",
@@ -98,19 +103,19 @@ class TouchIDModal extends Component {
         }
 
         this.EnableInvalid = {
-            TITLE:              "Habilite TouchID",
+            TITLE:              this.secondaryTitle,
             ICON:               "md-finger-print",
             BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
             MESSAGE:            "Tente novamente.",
-            ACTION:             "Cancelar",
+            ACTION:             this.cancelText,
         }
 
         this.EnableCanceled = {
-            TITLE:              "Habilite TouchID",
+            TITLE:              this.secondaryTitle,
             ICON:               "md-close",
             BACKGROUND_COLOR:   "rgba(255, 0, 0, 1)",
             MESSAGE:            "Autenticação cancelado.",
-            ACTION:             "Cancelar",
+            ACTION:             this.cancelText,
         }
 
         Object.freeze(this.AuthenticationIdle);
@@ -286,7 +291,7 @@ class TouchIDModal extends Component {
         );
     }
 
-    _renderAction() {        
+    _renderAction() {
         if ( this.state.action != "" ) {
             return (
                 <TouchableOpacity
