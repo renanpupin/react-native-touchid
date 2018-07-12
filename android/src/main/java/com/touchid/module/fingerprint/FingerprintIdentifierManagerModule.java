@@ -2,6 +2,7 @@ package com.touchid.module.fingerprint;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Application;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -19,6 +20,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.LifecycleEventListener;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -42,7 +44,7 @@ import javax.crypto.SecretKey;
  *
  */
 
-public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModule
+public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModule implements LifecycleEventListener
 {
     // ATRIBUTES ===================================================================================
 
@@ -78,6 +80,7 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
         fingerprintManager = FingerprintManagerCompat.from(reactContext);
         keyguardManager = (KeyguardManager) reactContext.getSystemService(Context.KEYGUARD_SERVICE);
+        this.reactContext.addLifecycleEventListener(this);
     }
 
     // METHODS =====================================================================================
@@ -203,6 +206,24 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
         } catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException("Failed to init Cipher", e);
         }
+    }
+
+    @Override
+    public void onHostResume() {
+
+    }
+
+    @Override
+    public void onHostPause() {
+
+        Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule onHostPause: ");
+        cancelAuthentication(null);
+    }
+
+    @Override
+    public void onHostDestroy() {
+//         do not set state to destroyed, do not send an event. By the current implementation, the
+//         catalyst instance is going to be immediately dropped, and all JS calls with it.
     }
 
     // SEND EVENT ==================================================================================
