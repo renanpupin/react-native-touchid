@@ -61,10 +61,8 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     public static final int START = 12;               // Start authentication
 
     private ReactApplicationContext reactContext = null;
-
     private FingerprintManagerCompat fingerprintManager;
     private KeyguardManager keyguardManager;
-
     private FingerprintHandler fingerprintHandler;
     private KeyStore keyStore;
     private KeyGenerator keyGenerator;
@@ -94,6 +92,14 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
         promise.resolve(hasFingerprintSensor() ? SUCCESS : TOUCHIDNOTAVAILABLE);
     }
 
+    @Override
+    public void onCatalystInstanceDestroy()
+    {
+        super.onCatalystInstanceDestroy();
+        Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule onCatalystInstanceDestroy: ");
+        cancelAuthentication(null);
+    }
+
     public boolean hasFingerprintSensor() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -111,19 +117,19 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
         if ( !hasFingerprintSensor() ) {
 
             // if do not exist finger print sensor or API compatibility
-            Log.d(getName(), "no sensor");
+            Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule no sensor");
             promise.resolve(TOUCHIDNOTAVAILABLE);
 
         } else if ( !fingerprintManager.hasEnrolledFingerprints() ) {
 
             // if do not exist finger print registered
-            Log.d(getName(), "no registered");
+            Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule no registered");
             promise.resolve(PASSCODENOTSET);
 
         } else if ( !keyguardManager.isKeyguardSecure() ) {
 
             // if lock screen security is not enabled
-            Log.d(getName(), "lock screen not enable");
+            Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule lock screen not enable");
             promise.resolve(NOLOCKSCREEN);
 
         } else {

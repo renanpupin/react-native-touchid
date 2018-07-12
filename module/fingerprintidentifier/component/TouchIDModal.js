@@ -161,7 +161,7 @@ class TouchIDModal extends Component {
 
     setType (type) : void {
 
-        console.log("TouchIDManager", "setType");
+        console.log("TouchIDManager", "TouchIDModal setType");
         this.setState({
             title:              type.TITLE,
             icon:               type.ICON,
@@ -173,14 +173,14 @@ class TouchIDModal extends Component {
 
     show() : void {
 
-        console.log("TouchIDManager", "show");
+        console.log("TouchIDManager", "TouchIDModal show");
         this.setType(this.AuthenticationIdle);
         this.setState({visible: true});
     }
 
     close() : void {
 
-        console.log("TouchIDManager", "close");
+        console.log("TouchIDManager", "TouchIDModal close");
         this.setState({visible: false});
     }
 
@@ -318,10 +318,6 @@ class TouchIDModal extends Component {
         }
     }
 }
-
-const styles = StyleSheet.create({
-
-});
 
 //==========================================================================
 // EXPORTS
