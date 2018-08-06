@@ -2,7 +2,6 @@ package com.touchid.module.fingerprint;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Application;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -15,12 +14,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.util.Log;
 
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.facebook.react.bridge.LifecycleEventListener;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -39,14 +37,16 @@ import javax.crypto.SecretKey;
 
 /**
  * Created by Teruya on 09/01/2018.
- *
+ * <p>
  * Finger print recognition is available with API level 23 (Marshmallow) and higher only.
- *
  */
 
-public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModule implements LifecycleEventListener
-{
-    // ATRIBUTES ===================================================================================
+public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
+
+    private static final String TAG = "TouchID";
+
+    // =============================================================================================
+    // ATTRIBUTES ==================================================================================
 
     public static final int APPCANCEL = 0;            // Authentication was cancelled by application
     public static final int FAILED = 1;               // The user failed to provide valid credentials
@@ -72,9 +72,11 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     private FingerprintManagerCompat.CryptoObject cryptoObject;
     private static final String KEY_NAME = "key";
 
+    // =============================================================================================
     // CONSTRUCTOR =================================================================================
 
     public FingerprintIdentifierManagerModule(ReactApplicationContext reactContext) {
+
         super(reactContext);
         this.reactContext = reactContext;
 
@@ -83,23 +85,26 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
         this.reactContext.addLifecycleEventListener(this);
     }
 
+    // =============================================================================================
     // METHODS =====================================================================================
 
     @Override
     public String getName() {
+
         return "FingerprintIdentifierManagerModule";
     }
 
     @ReactMethod
     public void hasFingerprintSensor(Promise promise) {
+
         promise.resolve(hasFingerprintSensor() ? SUCCESS : TOUCHIDNOTAVAILABLE);
     }
 
     @Override
-    public void onCatalystInstanceDestroy()
-    {
+    public void onCatalystInstanceDestroy() {
+
         super.onCatalystInstanceDestroy();
-        Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule onCatalystInstanceDestroy: ");
+        Log.d(TAG, "FingerprintIdentifierManagerModule onCatalystInstanceDestroy: ");
         cancelAuthentication(null);
     }
 
@@ -117,47 +122,47 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
         cancelAuthentication(null);
 
-        if ( !hasFingerprintSensor() ) {
+        if (!hasFingerprintSensor()) {
 
             // if do not exist finger print sensor or API compatibility
-            Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule no sensor");
+            Log.d(TAG, "FingerprintIdentifierManagerModule no sensor");
             promise.resolve(TOUCHIDNOTAVAILABLE);
 
-        } else if ( !fingerprintManager.hasEnrolledFingerprints() ) {
+        } else if (!fingerprintManager.hasEnrolledFingerprints()) {
 
             // if do not exist finger print registered
-            Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule no registered");
+            Log.d(TAG, "FingerprintIdentifierManagerModule no registered");
             promise.resolve(PASSCODENOTSET);
 
-        } else if ( !keyguardManager.isKeyguardSecure() ) {
+        } else if (!keyguardManager.isKeyguardSecure()) {
 
             // if lock screen security is not enabled
-            Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule lock screen not enable");
+            Log.d(TAG, "FingerprintIdentifierManagerModule lock screen not enable");
             promise.resolve(NOLOCKSCREEN);
 
         } else {
             try {
                 generateKey();
+                if (initCipher()) {
+                    cryptoObject = new FingerprintManagerCompat.CryptoObject(cipher);
+                    fingerprintHandler = new FingerprintHandler(reactContext, fingerprintManager);
+                    fingerprintHandler.startAuthentication(cryptoObject);
+                    promise.resolve(START);
+                } else {
+                    promise.resolve(FAILED);
+                }
             } catch (FingerprintException e) {
                 e.printStackTrace();
                 promise.resolve(FAILED);
-            }
-            if( initCipher() ) {
-                cryptoObject = new FingerprintManagerCompat.CryptoObject(cipher);
-                fingerprintHandler = new FingerprintHandler(reactContext, fingerprintManager);
-                fingerprintHandler.startAuthentication(cryptoObject);
-                promise.resolve(START);
-            } else {
-                promise.resolve(FAILED);
-                // reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("onAuthenticationResult", FingerprintIdentifierManagerModule.FAILED);
             }
         }
     }
 
     @ReactMethod
     private void cancelAuthentication(Promise promise) {
-        if ( !hasFingerprintSensor() ) {
-            if ( promise != null ) {
+
+        if (!hasFingerprintSensor()) {
+            if (promise != null) {
                 promise.resolve(false);
             }
         } else {
@@ -168,13 +173,14 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
             fingerprintHandler = null;
             cryptoObject = null;
             cipher = null;
-            if ( promise != null ) {
+            if (promise != null) {
                 promise.resolve(sucess);
             }
         }
     }
 
     private void generateKey() throws FingerprintException {
+
         try {
             keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
@@ -191,9 +197,11 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @TargetApi(Build.VERSION_CODES.M)
     public boolean initCipher() {
+
         try {
             cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
             throw new RuntimeException("Failed to get Cipher", e);
         }
         try {
@@ -202,8 +210,13 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return true;
         } catch (KeyPermanentlyInvalidatedException e) {
+            e.printStackTrace();
+            return false;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
             return false;
         } catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            e.printStackTrace();
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }
@@ -216,7 +229,7 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     @Override
     public void onHostPause() {
 
-        Log.d("TouchIDManagerModule", "FingerprintIdentifierManagerModule onHostPause: ");
+        Log.d(TAG, "FingerprintIdentifierManagerModule onHostPause: ");
         cancelAuthentication(null);
     }
 
@@ -226,13 +239,16 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 //         catalyst instance is going to be immediately dropped, and all JS calls with it.
     }
 
+    // =============================================================================================
     // SEND EVENT ==================================================================================
 
+    // =============================================================================================
     // CLASS =======================================================================================
 
     private class FingerprintException extends Exception {
 
         public FingerprintException(Exception e) {
+
             super(e);
         }
     }
