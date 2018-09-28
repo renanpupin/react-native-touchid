@@ -43,7 +43,7 @@ import javax.crypto.SecretKey;
 
 public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
 
-    private static final String TAG = "TouchID";
+    private static final String TAG = "TouchId";
 
     // =============================================================================================
     // ATTRIBUTES ==================================================================================
@@ -96,7 +96,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void hasFingerprintSensor(Promise promise) {
-
         promise.resolve(hasFingerprintSensor() ? SUCCESS : TOUCHIDNOTAVAILABLE);
     }
 
@@ -110,10 +109,32 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     public boolean hasFingerprintSensor() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return (ActivityCompat.checkSelfPermission(reactContext, Manifest.permission.USE_FINGERPRINT) == PackageManager.PERMISSION_GRANTED && reactContext.getSystemService(FingerprintManager.class).isHardwareDetected());
-        } else {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                // code of the application permission (granted or not)
+                int appPermissionCode = ActivityCompat.checkSelfPermission(reactContext, Manifest.permission.USE_FINGERPRINT);
+
+                // code of the permission grated
+                int permissionGratedCode = PackageManager.PERMISSION_GRANTED;
+
+                // does exist hardware
+                boolean isHardwareDetected = false;
+
+                // fingerprintManager instance (some OS do not exist)
+                FingerprintManager fingerprintManager = reactContext.getSystemService(FingerprintManager.class);
+                if (fingerprintManager != null) {
+                    isHardwareDetected = fingerprintManager.isHardwareDetected();
+                    return (appPermissionCode == permissionGratedCode && isHardwareDetected);
+                }
+
+                return false;
+            }
+
             return (FingerprintManagerCompat.from(reactContext).isHardwareDetected());
+        } catch (Exception e) {
+            Log.d(TAG, "hasFingerprintSensor: " + e.toString());
+            return false;
         }
     }
 
@@ -228,7 +249,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @Override
     public void onHostPause() {
-
         Log.d(TAG, "FingerprintIdentifierManagerModule onHostPause: ");
         cancelAuthentication(null);
     }
