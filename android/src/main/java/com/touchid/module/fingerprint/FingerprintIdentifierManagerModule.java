@@ -76,7 +76,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     // CONSTRUCTOR =================================================================================
 
     public FingerprintIdentifierManagerModule(ReactApplicationContext reactContext) {
-
         super(reactContext);
         this.reactContext = reactContext;
 
@@ -90,7 +89,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @Override
     public String getName() {
-
         return "FingerprintIdentifierManagerModule";
     }
 
@@ -101,14 +99,12 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @Override
     public void onCatalystInstanceDestroy() {
-
         super.onCatalystInstanceDestroy();
         Log.d(TAG, "FingerprintIdentifierManagerModule onCatalystInstanceDestroy: ");
         cancelAuthentication(null);
     }
 
     public boolean hasFingerprintSensor() {
-
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -130,7 +126,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
                 return false;
             }
-
             return (FingerprintManagerCompat.from(reactContext).isHardwareDetected());
         } catch (Exception e) {
             Log.d(TAG, "hasFingerprintSensor: " + e.toString());
@@ -140,7 +135,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void authenticationFingerprintRequest(Promise promise) {
-
         cancelAuthentication(null);
 
         if (!hasFingerprintSensor()) {
@@ -181,7 +175,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     private void cancelAuthentication(Promise promise) {
-
         if (!hasFingerprintSensor()) {
             if (promise != null) {
                 promise.resolve(false);
@@ -201,7 +194,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     }
 
     private void generateKey() throws FingerprintException {
-
         try {
             keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
@@ -218,7 +210,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @TargetApi(Build.VERSION_CODES.M)
     public boolean initCipher() {
-
         try {
             cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
@@ -268,7 +259,6 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
     private class FingerprintException extends Exception {
 
         public FingerprintException(Exception e) {
-
             super(e);
         }
     }
