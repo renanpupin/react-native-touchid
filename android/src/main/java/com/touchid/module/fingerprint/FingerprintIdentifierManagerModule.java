@@ -94,7 +94,12 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void hasFingerprintSensor(Promise promise) {
-        promise.resolve(hasFingerprintSensor() ? SUCCESS : TOUCHIDNOTAVAILABLE);
+        promise.resolve((hasFingerprintSensor()) ? SUCCESS : TOUCHIDNOTAVAILABLE);
+    }
+
+    @ReactMethod
+    public void hasEnrolledFingerprints(Promise promise){
+        promise.resolve((hasEnrolledFingerprints()) ? SUCCESS : PASSCODENOTSET);
     }
 
     @Override
@@ -104,29 +109,66 @@ public class FingerprintIdentifierManagerModule extends ReactContextBaseJavaModu
         cancelAuthentication(null);
     }
 
-    public boolean hasFingerprintSensor() {
+    public boolean hasEnrolledFingerprints() {
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // code of the application permission (granted or not)
+            int appPermissionCode = ActivityCompat.checkSelfPermission(reactContext, Manifest.permission.USE_FINGERPRINT);
+            
+            // code of the permission grated
+            int permissionGratedCode = PackageManager.PERMISSION_GRANTED;
 
-                // code of the application permission (granted or not)
-                int appPermissionCode = ActivityCompat.checkSelfPermission(reactContext, Manifest.permission.USE_FINGERPRINT);
-
-                // code of the permission grated
-                int permissionGratedCode = PackageManager.PERMISSION_GRANTED;
-
-                // does exist hardware
-                boolean isHardwareDetected = false;
-
-                // fingerprintManager instance (some OS do not exist)
-                FingerprintManager fingerprintManager = reactContext.getSystemService(FingerprintManager.class);
-                if (fingerprintManager != null) {
-                    isHardwareDetected = fingerprintManager.isHardwareDetected();
-                    return (appPermissionCode == permissionGratedCode && isHardwareDetected);
+            if (appPermissionCode == permissionGratedCode){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    FingerprintManager fingerprintManager = reactContext.getSystemService(FingerprintManager.class);
+                    if (fingerprintManager != null) {
+                        return fingerprintManager.hasEnrolledFingerprints();
+                    }
+                    return false;
                 }
-
+                FingerprintManagerCompat fingerCompat = FingerprintManagerCompat.from(reactContext);
+                if (fingerCompat != null) {
+                    return fingerCompat.hasEnrolledFingerprints();
+                }else{
+                    return false;
+                }
+            }else{
                 return false;
             }
-            return (FingerprintManagerCompat.from(reactContext).isHardwareDetected());
+        } catch (Exception e) {
+            Log.d(TAG, "hasFingerprintSensor: " + e.toString());
+            return false;
+        }
+    }
+
+    public boolean hasFingerprintSensor() {
+        try {
+            // code of the application permission (granted or not)
+            int appPermissionCode = ActivityCompat.checkSelfPermission(reactContext, Manifest.permission.USE_FINGERPRINT);
+
+            // code of the permission grated
+            int permissionGratedCode = PackageManager.PERMISSION_GRANTED;
+
+            if (appPermissionCode == permissionGratedCode){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    // does exist hardware
+                    boolean isHardwareDetected = false;
+
+                    // fingerprintManager instance (some OS do not exist)
+                    FingerprintManager fingerprintManager = reactContext.getSystemService(FingerprintManager.class);
+                    if (fingerprintManager != null) {
+                        return fingerprintManager.isHardwareDetected();
+                    }
+                    return false;
+                }
+                FingerprintManagerCompat fingerCompat = FingerprintManagerCompat.from(reactContext);
+                if (fingerCompat != null) {
+                    return fingerCompat.isHardwareDetected();
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
         } catch (Exception e) {
             Log.d(TAG, "hasFingerprintSensor: " + e.toString());
             return false;

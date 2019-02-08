@@ -23,7 +23,25 @@ class FingerprintIdentifierManagerModule: NSObject {
     // 1. Create a authentication context
     let authenticationContext = LAContext()
     var error:NSError?
+    
+    // 2. Check if the device has a fingerprint sensor
+    // If not, show the user an alert view and bail out!
+    guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+      print("No fingerprint sensor")
+      resolve(false)
+      return
+    }
 
+    print("Yes fingerprint sensor")
+    resolve(true)
+  }
+
+  @objc func hasEnrolledFingerprints(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+    
+    // 1. Create a authentication context
+    let authenticationContext = LAContext()
+    var error:NSError?
+    
     // 2. Check if the device has a fingerprint sensor
     // If not, show the user an alert view and bail out!
     guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {

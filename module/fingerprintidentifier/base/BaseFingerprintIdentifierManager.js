@@ -69,6 +69,10 @@ class BaseFingerprintIdentifierManager {
         return await NativeModules.FingerprintIdentifierManagerModule.hasFingerprintSensor();
     }
 
+    async hasEnrolledFingerprints() : boolean {
+        return await NativeModules.FingerprintIdentifierManagerModule.hasEnrolledFingerprints();
+    }
+
     //==========================================================================
     // SETTERS & GETTERS
 }
