@@ -1,6 +1,6 @@
 {
   "name": "react-native-touchid",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "react-native library to indentify the user fingerprint",
   "main": "index.js",
   "scripts": {
