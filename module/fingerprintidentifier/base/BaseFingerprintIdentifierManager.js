@@ -54,6 +54,7 @@ class BaseFingerprintIdentifierManager {
         Object.freeze(this.Response);
 
         this.hasFingerprintSensor = this.hasFingerprintSensor.bind(this);
+        this.hasEnrolledFingerprints = this.hasEnrolledFingerprints.bind(this);
     }
 
     //==========================================================================
