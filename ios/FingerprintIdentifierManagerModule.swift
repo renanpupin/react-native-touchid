@@ -18,6 +18,10 @@ class FingerprintIdentifierManagerModule: NSObject {
 
   // METHODS ================================================================================================================
 
+    override static func requiresMainQueueSetup() -> Bool {
+        return true;
+    }
+    
   @objc func hasFingerprintSensor(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
 
     // 1. Create a authentication context
