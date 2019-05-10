@@ -18,7 +18,7 @@ class FingerprintIdentifierManagerModule: NSObject {
 
   // METHODS ================================================================================================================
 
-    override static func requiresMainQueueSetup() -> Bool {
+    static func requiresMainQueueSetup() -> Bool {
         return true;
     }
     
